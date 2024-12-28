@@ -1,0 +1,25 @@
+#include <iostream>
+#include <string>
+#include <set>
+#include <vector>
+
+int main() {
+    std::set<std::string> directories;
+    std::string file_path;
+
+    while (std::cin >> file_path) {
+        std::string current_dir = "/";
+        directories.insert(current_dir);
+
+        for (size_t i = 1; i < file_path.size(); ++i) {
+            if (file_path[i] == '/') {
+                 current_dir = file_path.substr(0, i + 1);
+                directories.insert(current_dir);
+            }
+        }
+    }
+     for (const auto& dir : directories) {
+        std::cout << dir << "\n";
+    }
+}
+
