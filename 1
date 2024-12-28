@@ -1,0 +1,23 @@
+#include <iostream>
+#include <unordered_set>
+#include <sstream>
+#include <string>
+
+int main() {
+    std::string input_line;
+    std::getline(std::cin, input_line);
+
+    std::unordered_set<int> seen_numbers;
+    std::istringstream iss(input_line);
+    int number;
+
+    while (iss >> number) {
+        if (seen_numbers.find(number) != seen_numbers.end()) {
+            std::cout << "YES" << std::endl;
+        } else {
+            std::cout << "NO" << std::endl;
+            seen_numbers.insert(number);
+        }
+    }
+}
+
