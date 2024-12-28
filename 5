@@ -1,0 +1,36 @@
+#include <iostream>
+#include <string>
+#include <algorithm>
+#include <map>
+#include <vector>
+
+int main() {
+    int m, n;
+    std::cin >> m >> n;
+
+    std::map<std::string, int> ngram_counts;
+    std::string word;
+     size_t n_size_t = static_cast<size_t>(n);
+    for (int i = 0; i < m; ++i) {
+        std::cin >> word;
+        if (word.length() >= n_size_t) {
+            for (size_t j = 0; j <= word.length() - n; ++j) {
+                std::string ngram = word.substr(j, n);
+                ngram_counts[ngram]++;
+            }
+        }
+    }
+    std::vector<std::pair<std::string, int>> sorted_ngrams(ngram_counts.begin(), ngram_counts.end());
+    std::sort(sorted_ngrams.begin(), sorted_ngrams.end(),
+              [](const std::pair<std::string, int>& a, const std::pair<std::string, int>& b) {
+                  if (a.second != b.second) {
+                      return a.second > b.second;
+                  }
+                  return a.first < b.first;
+              });
+
+    for (const auto& pair : sorted_ngrams) {
+        std::cout << pair.first << " - " << pair.second << std::endl;
+    }
+}
+
