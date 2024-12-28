@@ -1,0 +1,43 @@
+#include <iostream>
+#include <string>
+#include <vector>
+#include <algorithm>
+#include <set>
+
+int main() {
+    std::vector<std::string> words_list;
+    std::string current_word;
+
+    while (std::cin >> current_word) {
+        words_list.push_back(current_word);
+    }
+
+    if (words_list.empty()) {
+        return 0;
+    }
+
+    std::set<char> common_letters_set;
+
+    for (char letter : words_list[0]) {
+        common_letters_set.insert(letter);
+    }
+
+     for (size_t i = 1; i < words_list.size(); ++i) {
+       
+        std::set<char> current_word_letters_set;
+        
+        for(char letter: words_list[i]){
+            current_word_letters_set.insert(letter);
+        }
+         std::set<char> new_common_letters_set;
+          for (char letter : common_letters_set){
+            if (current_word_letters_set.find(letter) != current_word_letters_set.end()) {
+                new_common_letters_set.insert(letter);
+                }
+           }
+          common_letters_set = new_common_letters_set;
+    }
+    for (char letter : common_letters_set) {
+        std::cout << letter;
+    }
+}
