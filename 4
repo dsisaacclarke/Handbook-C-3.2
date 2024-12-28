@@ -1,0 +1,36 @@
+#include <iostream>
+#include <string>
+#include <vector>
+#include <sstream>
+#include <set>
+#include <map>
+
+int main() {
+    int n;
+    std::cin >> n;
+    std::cin.ignore();
+
+    std::map<int, std::set<std::string>> page_keywords;
+
+    for (int i = 0; i < n; ++i) {
+        std::string line;
+        std::getline(std::cin, line);
+
+        std::istringstream iss(line);
+        std::string keyword;
+        int page;
+
+        iss >> keyword >> page;
+
+        page_keywords[page].insert(keyword);
+    }
+
+    for (const auto& pair : page_keywords) {
+        std::cout << pair.first << " ";
+        for (const auto& keyword : pair.second) {
+            std::cout << keyword << " ";
+        }
+        std::cout << std::endl;
+    }
+}
+
